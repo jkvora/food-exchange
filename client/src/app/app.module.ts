@@ -10,12 +10,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './shared/components/header/header.component';
 
 import { MatToolbarModule} from '@angular/material';
+import { BarchartComponent } from './components/barchart/barchart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     OrdersComponent,
-    HeaderComponent
+    HeaderComponent,
+    BarchartComponent
   ],
   imports: [
     BrowserModule,
