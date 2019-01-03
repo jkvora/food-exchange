@@ -45,9 +45,14 @@ app.get('/allorders',function(req,res){
         attributes: { exclude: ['createdAt', 'updatedAt'] }
     }).then(data => { 
         console.log(data);
+        let allorders=data.sort(sortByDate);
         res.send(data);
     });
 })
+
+function sortByDate(orderA,orderB){
+    return  orderA.orderDate-orderB.orderDate;
+}
 
 
 //socket.io instantiation
