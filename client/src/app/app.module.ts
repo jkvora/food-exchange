@@ -9,8 +9,9 @@ import { OrdersService } from './services/orders.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './shared/components/header/header.component';
 
-import { MatToolbarModule} from '@angular/material';
+import { MatToolbarModule,MatNativeDateModule,MatDatepickerModule, MatInputModule, MatButtonModule} from '@angular/material';
 import { BarchartComponent } from './components/barchart/barchart.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,12 @@ import { BarchartComponent } from './components/barchart/barchart.component';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    MatToolbarModule
+    FormsModule,
+    MatInputModule,
+    MatToolbarModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatButtonModule
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA],
   providers: [SocketService,OrdersService],

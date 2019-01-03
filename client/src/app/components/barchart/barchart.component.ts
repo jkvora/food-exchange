@@ -17,6 +17,11 @@ am4core.useTheme(am4themes_animated);
 export class BarchartComponent implements OnInit, OnChanges {
 
 
+  public startMinDate = new Date(2017, 1, 1);
+  public endMaxDate = new Date(2019, 3, 1);
+
+  public userStartDate=this.startMinDate;
+  public userEndDate=this.endMaxDate;
   @Input() orderData;
 
   //Chart 
@@ -86,11 +91,10 @@ export class BarchartComponent implements OnInit, OnChanges {
 
 
   getTimeRangeData() {
-    let startDate = new Date(2017, 1, 1);
-    let endDate = new Date(2019, 3, 1);
+   
     let ordersDelievered = 0, ordersCancelled = 0, ordersNotDelievered = 0;
     for (let i = 0; i < this.orderData.length; i++) {
-      if ((new Date(this.orderData[i].orderDate).getTime() - startDate.getTime() > 0) && (new Date(this.orderData[i].orderDate).getTime() - endDate.getTime() < 0)) {
+      if ((new Date(this.orderData[i].orderDate).getTime() - this.userStartDate.getTime() > 0) && (new Date(this.orderData[i].orderDate).getTime() - this.userEndDate.getTime() < 0)) {
         ordersDelievered += this.orderData[i].orderDelievered;
         ordersCancelled += this.orderData[i].orderCancelled;
         ordersNotDelievered += this.orderData[i].orderNotDelievered;
@@ -101,6 +105,15 @@ export class BarchartComponent implements OnInit, OnChanges {
       cancelled: ordersCancelled,
       delievered: ordersDelievered,
       notdelievered: ordersNotDelievered
+    }
+  }
+
+  dateChanged(event,val){
+    if(val==1){
+      this.userStartDate=event.value;
+    }
+    else if(val==2){
+      this.userEndDate=event.value;
     }
   }
 

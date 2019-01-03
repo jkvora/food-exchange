@@ -1,2 +1,21 @@
+<div class="alignCenter">
+  <mat-form-field class="mg20"> 
+    <input matInput [matDatepicker]="picker1" [value]="userStartDate" (dateChange)="dateChanged($event,1)" placeholder="Choose a start date" [min]="startMinDate" [max]="endMaxDate">
+    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+    <mat-datepicker #picker1 ></mat-datepicker>
+  </mat-form-field>
+
+
+  <mat-form-field class="mg20">
+    <input matInput [matDatepicker]="picker2" [value]="userEndDate" (dateChange)="dateChanged($event,2)" placeholder="Choose a end date" [min]="startMinDate" [max]="endMaxDate">
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker #picker2></mat-datepicker>
+  </mat-form-field>
+
+  <button class="mg20" mat-raised-button color="primary" (click)="drawChart()">Show</button>
+  
+  
+</div>
+
 
 <div id="chartdiv" style="width: 100%; height: 500px"></div>
