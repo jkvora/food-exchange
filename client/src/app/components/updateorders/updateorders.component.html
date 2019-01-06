@@ -1,38 +1,38 @@
-<h2 style="text-align:center">Updates For today</h2>
+<h2 style="text-align:center">Updates For Current Time</h2>
 
  
 <form class="mgl50">
   <mat-form-field >
-    <input matInput placeholder="Order Cancelled" value="0">
+    <input matInput placeholder="Order Cancelled" [ngModelOptions]="{standalone: true}" [(ngModel)]="orderCancelled">
   </mat-form-field>
-  <button class="mg20" mat-raised-button>Update</button>
+  <button class="mg20" mat-raised-button (click)="updateStatus(updateType.ORDER_CANCELLED)">Update</button>
 </form>
 
 <form class="mgl50">
   <mat-form-field >
-    <input matInput placeholder="Order Delievered" value="0">
+    <input matInput placeholder="Order Delievered" [ngModelOptions]="{standalone: true}" [(ngModel)]="orderDelievered">
   </mat-form-field>
-  <button class="mg20" mat-raised-button>Update</button>
+  <button class="mg20" mat-raised-button (click)="updateStatus(updateType.ORDER_DELIEVERD)">Update</button>
 </form>
 
 <form class="mgl50">
   <mat-form-field >
-    <input matInput placeholder="Order Not Delievered" value="0">
+    <input matInput placeholder="Order Not Delievered" [ngModelOptions]="{standalone: true}" [(ngModel)]="orderNotDelievered">
   </mat-form-field>
-  <button class="mg20" mat-raised-button>Update</button>
+  <button class="mg20" mat-raised-button (click)="updateStatus(updateType.ORDER_NOT_DELIEVERED)">Update</button>
 </form>
 
 <form class="mgl50">
   <mat-form-field >
-    <input matInput placeholder="Existing Customer" value="0">
+    <input matInput placeholder="Existing Customer" [ngModelOptions]="{standalone: true}" [(ngModel)]="existingCustomer">
   </mat-form-field>
-  <button class="mg20" mat-raised-button>Update</button>
+  <button class="mg20" mat-raised-button (click)="updateStatus(updateType.EXISTING_CUSTOMERS)">Update</button>
 </form>
 
 
 <form class="mgl50">
   <mat-form-field >
-    <input matInput placeholder="New Customer" value="0">
+    <input matInput placeholder="New Customer" [ngModelOptions]="{standalone: true}" [(ngModel)]="newCustomer">
   </mat-form-field>
-  <button class="mg20" mat-raised-button>Update</button>
+  <button class="mg20" mat-raised-button (click)="updateStatus(updateType.NEW_CUSTOMERS)">Update</button>
 </form>

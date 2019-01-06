@@ -50,6 +50,10 @@ app.get('/allorders',function(req,res){
     });
 })
 
+app.post('/updateorders',function(req,res){
+    console.log(req.body);
+});
+
 function sortByDate(orderA,orderB){
     return  orderA.orderDate-orderB.orderDate;
 }

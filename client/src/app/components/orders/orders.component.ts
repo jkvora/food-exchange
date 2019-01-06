@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SocketService } from 'src/app/services/socket.service';
-import { SOCKET_EVENT } from '../models/common.model';
+import { SOCKET_EVENT } from '../../models/common.model';
 import { Subject } from 'rxjs';
 import { OrdersService } from 'src/app/services/orders.service';
 import { takeUntil } from 'rxjs/operators';
