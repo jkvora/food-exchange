@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser');
 var cors = require('cors');
 
+var orderDll = require('./db/orders');
 
 const app = express();
 
@@ -38,27 +39,6 @@ server = app.listen(3000, () => {
 })
 
 
-
-var models = require('./models');
-app.get('/allorders',function(req,res){
-    models.orders.findAll({
-        attributes: { exclude: ['createdAt', 'updatedAt'] }
-    }).then(data => { 
-        console.log(data);
-        let allorders=data.sort(sortByDate);
-        res.send(data);
-    });
-})
-
-app.post('/updateorders',function(req,res){
-    console.log(req.body);
-});
-
-function sortByDate(orderA,orderB){
-    return  orderA.orderDate-orderB.orderDate;
-}
-
-
 //socket.io instantiation
 const io = require("socket.io")(server)
 
@@ -77,3 +57,32 @@ io.on('connection', (socket) => {
 
 
 })
+
+
+
+app.get('/allorders', function (req, res) {
+    orderDll.getallOrder().then(output => {
+        res.send(output);
+    }).catch(err => {
+        res.send([]);
+    })
+})
+
+app.post('/updateorders', function (req, res) {
+    orderDll.updateOrders(req.body).then(updated => {
+        if (updated) {
+            orderDll.getallOrder().then(output => {
+                res.send(output);
+                io.sockets.send(output);
+            }).catch(err => {
+                res.send([]);
+            })
+        }
+        else {
+            res.send([]);
+        }
+    })
+
+});
+
+

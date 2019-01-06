@@ -25,6 +25,10 @@ module.exports = function(sequelize, DataTypes) {
 			allowNull: true
 		}
 	}, {
-		tableName: 'orders'
+		tableName: 'orders',
+		timestamps: false,
+		defaultScope: {
+			attributes: { exclude: ['createdAt', 'updatedAt'] }
+		}
 	});
 };

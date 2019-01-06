@@ -48,9 +48,9 @@ export class OrdersComponent implements OnInit {
     this.socketService.initSocket();
 
     this.ioConnection = this.socketService.onMessage()
-      .subscribe((message) => {
-        console.log(message);
-        this.messages.push(message);
+      .subscribe((data) => {
+        console.log(data);
+        this.orderData=data;
       });
 
 
