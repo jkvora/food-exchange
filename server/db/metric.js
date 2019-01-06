@@ -2,17 +2,24 @@
 
 
 
-var models = require('./../models');
-var utils = require('./../utils');
+var models = require('../models');
+var utils = require('../utils');
 
-module.exports.getallOrder = function () {
+module.exports.getallMetrics = function () {
     return new Promise(function (resolve, reject) {
-        models.orders.findAll({
+        Promise.all(
+            [
+            models.orders.findAll({
             attributes: { exclude: ['createdAt', 'updatedAt'] }
-        }).then(data => {
+            })
+          , models.customers.findAll({
+            attributes: { exclude: ['createdAt', 'updatedAt'] }
+          })]) 
+        .then(data => {
             console.log(data);
-            data.sort(utils.sortByDate);
-            resolve(data);
+             let obj={ orders:data[0],customers:data[1]}
+          //  data.sort(utils.sortByDate);
+            resolve(obj);
         });
     })
 }

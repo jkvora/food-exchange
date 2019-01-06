@@ -34,7 +34,7 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
 var auto = new SequelizeAuto(config.database, config.username, config.password , {
   dialect: 'mysql',
   host: '127.0.0.1',
-  tables:['orders']
+  tables:['orders','customers']
 });
 
 

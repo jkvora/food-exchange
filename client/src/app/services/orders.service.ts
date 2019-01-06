@@ -15,13 +15,13 @@ export class OrdersService {
   /**
    * Get all  orders
    */
-  getallOrders() {
-    return this.http.get(environment.API_URL + "/allorders");
+  getAllMetrics() {
+    return this.http.get(environment.API_URL + "/allmetrics");
   }
 
 
 
-  updateOrders(updateObj:updateObj){
-    return this.http.post(environment.API_URL + "/updateorders",updateObj);
+  updateMetrics(updateObj:updateObj){
+    return this.http.post(environment.API_URL + "/updatemetrics",updateObj);
   }
 }

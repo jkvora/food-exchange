@@ -33,7 +33,7 @@ export class UpdateordersComponent implements OnInit {
     obj.dateTime = (new Date()).toISOString();
     obj.updateType = update;
     obj.value = this.getValueFromUpdateType(update);
-    this.orderService.updateOrders(obj).pipe(takeUntil(this.unsubscribe)).subscribe(res => {
+    this.orderService.updateMetrics(obj).pipe(takeUntil(this.unsubscribe)).subscribe(res => {
       console.log(res);
     });
   }

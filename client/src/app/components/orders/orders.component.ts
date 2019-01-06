@@ -21,7 +21,7 @@ export class OrdersComponent implements OnInit {
   //UnSubscription  Object
   private unsubscribe = new Subject<void>();
 
-  public orderData:any=[];
+  public metricData:any=[];
 
 
   constructor(
@@ -30,13 +30,13 @@ export class OrdersComponent implements OnInit {
 
   ngOnInit(): void {
     this.initIoConnection();
-    this.getallOrders();
+    this.getAllMetrics();
   }
 
-  private getallOrders() {
-    this.orderService.getallOrders().pipe(takeUntil(this.unsubscribe)).subscribe(res => {
+  private getAllMetrics() {
+    this.orderService.getAllMetrics().pipe(takeUntil(this.unsubscribe)).subscribe(res => {
       console.log(res);
-      this.orderData=res;
+      this.metricData=res;
     });
   }
 
@@ -50,7 +50,7 @@ export class OrdersComponent implements OnInit {
     this.ioConnection = this.socketService.onMessage()
       .subscribe((data) => {
         console.log(data);
-        this.orderData=data;
+        this.metricData=data;
       });
 
 

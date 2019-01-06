@@ -2,7 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser');
 var cors = require('cors');
 
-var orderDll = require('./db/orders');
+var metricDll = require('./db/metric');
 
 const app = express();
 
@@ -60,22 +60,22 @@ io.on('connection', (socket) => {
 
 
 
-app.get('/allorders', function (req, res) {
-    orderDll.getallOrder().then(output => {
+app.get('/allmetrics', function (req, res) {
+    metricDll.getallMetrics().then(output => {
         res.send(output);
     }).catch(err => {
-        res.send([]);
+        res.send({orders:[],customers:[]});
     })
 })
 
-app.post('/updateorders', function (req, res) {
-    orderDll.updateOrders(req.body).then(updated => {
+app.post('/updatemetrics', function (req, res) {
+    metricDll.updateOrders(req.body).then(updated => {
         if (updated) {
-            orderDll.getallOrder().then(output => {
+            metricDll.getallMetrics().then(output => {
                 res.send(output);
                 io.sockets.send(output);
             }).catch(err => {
-                res.send([]);
+                res.send({orders:[],customers:[]});
             })
         }
         else {

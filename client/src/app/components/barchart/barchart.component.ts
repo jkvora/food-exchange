@@ -22,7 +22,7 @@ export class BarchartComponent implements OnInit, OnChanges {
 
   public userStartDate=this.startMinDate;
   public userEndDate=this.endMaxDate;
-  @Input() orderData;
+  @Input() metricData;
 
   //Chart 
   private chart: am4charts.XYChart;
@@ -33,8 +33,8 @@ export class BarchartComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(change: SimpleChanges) {
-    if (change.orderData.currentValue.length > 0) {
-      this.drawChart()
+   if (change.metricData.currentValue.orders !==undefined) {
+     this.drawChart()
     }
   }
 
@@ -93,11 +93,12 @@ export class BarchartComponent implements OnInit, OnChanges {
   getTimeRangeData() {
    
     let ordersDelievered = 0, ordersCancelled = 0, ordersNotDelievered = 0;
-    for (let i = 0; i < this.orderData.length; i++) {
-      if ((new Date(this.orderData[i].orderDate).getTime() - this.userStartDate.getTime() > 0) && (new Date(this.orderData[i].orderDate).getTime() - this.userEndDate.getTime() < 0)) {
-        ordersDelievered += this.orderData[i].orderDelievered;
-        ordersCancelled += this.orderData[i].orderCancelled;
-        ordersNotDelievered += this.orderData[i].orderNotDelievered;
+
+    for (let i = 0; i < this.metricData.orders.length; i++) {
+      if ((new Date(this.metricData.orders[i].orderDate).getTime() - this.userStartDate.getTime() > 0) && (new Date(this.metricData.orders[i].orderDate).getTime() - this.userEndDate.getTime() < 0)) {
+        ordersDelievered += this.metricData.orders[i].orderDelievered;
+        ordersCancelled += this.metricData.orders[i].orderCancelled;
+        ordersNotDelievered += this.metricData.orders[i].orderNotDelievered;
       }
     }
 
