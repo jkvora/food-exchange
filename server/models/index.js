@@ -5,10 +5,10 @@ var path      = require('path');
 var Sequelize = require('sequelize');
 var basename  = path.basename(__filename);
 var env       = process.env.NODE_ENV || 'development';
-var config    =  require(__dirname + '/config.json');
+var config    =  require(__dirname + '/../config/config.json')[env];
 var db        = {};
 
-  var sequelize = new Sequelize("faasos", "root", "JalakVora*1994", config.development);
+  var sequelize = new Sequelize(config.database, config.username,config.password, config);
 
 
 fs

@@ -1,11 +1,15 @@
 var mysql = require('mysql2');
 var Sequelize = require('sequelize');
 var SequelizeAuto = require('sequelize-auto');
+
+var env       = process.env.NODE_ENV || 'development';
+var config    =  require(__dirname + '/../config.json')[env];
+
 var connection = mysql.createConnection({
   host: '127.0.0.1',
-  user: 'root',
-  password: 'JalakVora*1994',
-  database: 'faasos',
+  user: config.username,
+  password: config.password,
+  database: config.database,
   timeout:  60000,
   multipleStatements: true,
   typeCast : function castField(field, useDefaultTypeCasting ) {
@@ -21,13 +25,13 @@ var connection = mysql.createConnection({
 }
 });
 
-const sequelize = new Sequelize('faasos', 'root', 'JalakVora*1994', {
+const sequelize = new Sequelize(config.database, config.username, config.password, {
   dialect: 'mysql',
   host: '127.0.0.1'
 })
 
 
-var auto = new SequelizeAuto('faasos', 'root', 'JalakVora*1994', {
+var auto = new SequelizeAuto(config.database, config.username, config.password , {
   dialect: 'mysql',
   host: '127.0.0.1',
   tables:['orders']
