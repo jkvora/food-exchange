@@ -4,15 +4,15 @@ import { Injectable } from '@angular/core';
 import * as socketIo from 'socket.io-client';
 import { Observable } from 'rxjs';
 import { SOCKET_EVENT } from '../models/common.model';
+import { environment } from 'src/environments/environment.prod';
 
-const SERVER_URL = 'http://localhost:3000';
 
 @Injectable()
 export class SocketService {
     private socket;
 
     public initSocket(): void {
-        this.socket = socketIo(SERVER_URL);
+        this.socket = socketIo(environment.API_URL);
     }
 
     public send(message): void {
