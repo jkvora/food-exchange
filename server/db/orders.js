@@ -20,16 +20,46 @@ module.exports.getallOrder = function () {
 
 module.exports.updateOrders = function (obj) {
     return new Promise(function (resolve, reject) {
-        var updateOrders = models.orders.build({
-            orderCancelled: obj.value,
-            orderDelievered: 0,
-            orderNotDelievered: 0,
-            orderDate: obj.dateTime
-        });
+
+        let updatedObj = getupdateObject(obj);
+        var updateOrders = models.orders.build(updatedObj);
         updateOrders.save({ exclude: ['createdAt', 'updatedAt'] }).then(function (insertedRow) {
             resolve(true);
         }).catch(err => resolve(false));
     })
 
 
+}
+
+function getupdateObject(obj) {
+    switch (obj.updateType) {
+        case 1: {
+            //cancelled
+            return data = {
+                orderCancelled: obj.value,
+                orderDelievered: 0,
+                orderNotDelievered: 0,
+                orderDate: obj.dateTime
+            }
+        }
+        case 2: {
+            //delievered
+            return data = {
+                orderCancelled: 0,
+                orderDelievered: obj.value,
+                orderNotDelievered: 0,
+                orderDate: obj.dateTime
+            }
+        }
+        case 3: {
+            // not delievered
+            return data = {
+                orderCancelled: 0,
+                orderDelievered: 0,
+                orderNotDelievered: obj.value,
+                orderDate: obj.dateTime
+            }
+        }
+
+    }
 }
