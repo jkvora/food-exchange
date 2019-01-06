@@ -5,3 +5,7 @@
 body{
     font-family: 'Lato', sans-serif;
 }
+
+.mg20{
+    margin: 20px !important;
+}

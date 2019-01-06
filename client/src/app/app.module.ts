@@ -12,16 +12,21 @@ import { HeaderComponent } from './shared/components/header/header.component';
 import { MatToolbarModule,MatNativeDateModule,MatDatepickerModule, MatInputModule, MatButtonModule} from '@angular/material';
 import { BarchartComponent } from './components/barchart/barchart.component';
 import { FormsModule } from '@angular/forms';
+import { AppRouting } from './app-routing.module';
+import { UpdateordersComponent } from './components/updateorders/updateorders.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     OrdersComponent,
     HeaderComponent,
-    BarchartComponent
+    BarchartComponent,
+    UpdateordersComponent
   ],
   imports: [
     BrowserModule,
+    AppRouting,
+
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
