@@ -9,7 +9,10 @@
 .charts div {
     width: 50%;
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 700px) {
+    .charts{
+        display: block;
+    }
     .charts div {
         width: 100%;
     }  

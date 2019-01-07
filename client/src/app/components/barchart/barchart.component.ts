@@ -17,8 +17,9 @@ am4core.useTheme(am4themes_animated);
 export class BarchartComponent implements OnInit, OnChanges {
 
 
+
   public startMinDate = new Date(2017, 1, 1);
-  public endMaxDate = new Date(2019, 3, 1);
+  public endMaxDate = new Date(2019, 1, 1);
 
   public userStartDate=this.startMinDate;
   public userEndDate=this.endMaxDate;
