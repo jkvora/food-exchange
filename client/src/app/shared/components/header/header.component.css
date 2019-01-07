@@ -4,6 +4,10 @@
     color: #695506e6;
 }
 
+.title a{
+    text-decoration: none;
+}
+
 .mat-toolbar.mat-primary{
     background: ghostwhite;
     box-shadow: 2px 1px 2px 2px;

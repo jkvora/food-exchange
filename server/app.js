@@ -72,8 +72,8 @@ app.post('/updatemetrics', function (req, res) {
     metricDll.updateOrders(req.body).then(updated => {
         if (updated) {
             metricDll.getallMetrics().then(output => {
-                res.send(output);
                 io.sockets.send(output);
+                res.send(output);
             }).catch(err => {
                 res.send({orders:[],customers:[]});
             })

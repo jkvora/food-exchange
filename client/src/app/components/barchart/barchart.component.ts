@@ -24,9 +24,6 @@ export class BarchartComponent implements OnInit, OnChanges {
   public userEndDate=this.endMaxDate;
   @Input() metricData;
 
-  //Chart 
-  private chart: am4charts.XYChart;
-
   constructor(private zone: NgZone) { }
 
   ngOnInit() {
@@ -36,6 +33,10 @@ export class BarchartComponent implements OnInit, OnChanges {
    if (change.metricData.currentValue.orders !==undefined) {
      this.drawChart()
     }
+
+    if (change.metricData.currentValue.customers !==undefined) {
+      this.drawCustomerChart()
+     }
   }
 
   /**
@@ -118,15 +119,79 @@ export class BarchartComponent implements OnInit, OnChanges {
     }
   }
 
+   /**
+  * Draw chart acc. to data
+  * @param  data 
+  */
+ drawCustomerChart() {
+
+  this.zone.runOutsideAngular(() => {
+    // Create chart instance
+    var chart = am4core.create("customerdiv", am4charts.XYChart);
+
+    chart.marginRight = 400;
+    let sliceCustomerData = this.getCustomerData();
+
+
+    // Add data
+    chart.data = [{
+      "customer": "Existing",
+      "count": sliceCustomerData.existingcustomer
+    }, {
+      "customer": "New",
+      "count": sliceCustomerData.newcustomer
+    }];
+
+    //console.log('chart', chart);
+
+    // Create axes
+    var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+    categoryAxis.dataFields.category = "customer";
+    categoryAxis.title.text = "Customers";
+    categoryAxis.renderer.grid.template.location = 0;
+    categoryAxis.renderer.minGridDistance = 20;
+
+
+    var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+    valueAxis.title.text = "Customer Count";
+
+    // Create series
+    var series = chart.series.push(new am4charts.ColumnSeries());
+    series.dataFields.valueY = "count";
+    series.dataFields.categoryX = "customer";
+    series.name = "count";
+    series.tooltipText = "{name}: [bold]{valueY}[/]";
+
+    // Add cursor
+    chart.cursor = new am4charts.XYCursor();
+  });
+}
+
+getCustomerData() {
+   
+  let existingcustomer = 0, newcustomer = 0;
+  let currentDate=new Date();
+  let previousDayTime:any=currentDate.setDate(currentDate.getDate() - 1);
+
+  for (let i = 0; i < this.metricData.customers.length; i++) {
+    if( (new Date(this.metricData.customers[i].Date)).getTime() > previousDayTime){
+       newcustomer+=this.metricData.customers[i].crcount;
+    }
+    else{
+      existingcustomer+=this.metricData.customers[i].crcount;
+    }
+  }
+
+  return {
+    existingcustomer: existingcustomer,
+    newcustomer: newcustomer
+  }
+}
+
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.
     //Add 'implements OnDestroy' to the class.
 
-    this.zone.runOutsideAngular(() => {
-      if (this.chart) {
-        this.chart.dispose();
-      }
-    });
   }
 
 

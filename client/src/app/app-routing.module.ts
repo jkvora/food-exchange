@@ -6,10 +6,10 @@ import { OrdersComponent } from './components/orders/orders.component';
 
 const appRoutes: Routes = [
   { path: 'update', component: UpdateordersComponent },
-  { path: 'orders', component: OrdersComponent },
+  { path: 'metrics', component: OrdersComponent },
 
   {
-    path: '**', redirectTo: 'orders',
+    path: '**', redirectTo: 'metrics',
     pathMatch: 'full'
   }
 ];

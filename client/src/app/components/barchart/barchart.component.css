@@ -2,3 +2,15 @@
 .alignCenter{
     text-align:center;
 }
+
+.charts{
+    display: flex;
+}
+.charts div {
+    width: 50%;
+}
+@media screen and (max-width: 600px) {
+    .charts div {
+        width: 100%;
+    }  
+}
